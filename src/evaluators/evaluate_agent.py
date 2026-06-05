@@ -285,7 +285,7 @@ def poll_for_results(eval_object, eval_run):
 # Step 5 – Collect scores and save results
 # ---------------------------------------------------------------------------
 
-def retrieve_and_display_results(eval_object, run):
+def retrieve_and_display_results(eval_object, run, elapsed_seconds: int = 0):
     """
     Fetch per-item evaluator outputs, compute aggregate statistics, print a
     human-readable summary, and write the same summary to RESULTS_FILE.
@@ -347,6 +347,9 @@ def retrieve_and_display_results(eval_object, run):
         "groundedness":      "Groundedness     ",
     }
 
+    minutes, seconds = divmod(elapsed_seconds, 60)
+    elapsed_str = f"{minutes}m {seconds}s" if minutes else f"{seconds}s"
+
     lines = [
         "=" * 80,
         " Trail Guide Agent - Evaluation Results",
@@ -356,6 +359,7 @@ def retrieve_and_display_results(eval_object, run):
         f"  Total items  : {len(output_items)}",
         f"  Errored items: {len(errored_items)}",
         f"  Scored items : {len(scored_items)}",
+        f"  Elapsed time : {elapsed_str} ({elapsed_seconds}s)",
         "\nAverage Scores (1-5 scale, threshold: 3)",
     ]
 
@@ -413,11 +417,13 @@ def main() -> None:
     print(f"  Dataset: {dataset_name} (v{dataset_version})")
 
     try:
+        pipeline_start = time.time()
         data_id     = upload_dataset()                          # Step 1
         eval_object = create_evaluation_definition()            # Step 2
         eval_run    = run_evaluation(eval_object, data_id)      # Step 3
         run         = poll_for_results(eval_object, eval_run)   # Step 4
-        retrieve_and_display_results(eval_object, run)          # Step 5
+        elapsed     = int(time.time() - pipeline_start)
+        retrieve_and_display_results(eval_object, run, elapsed) # Step 5
 
         section("Cloud evaluation complete")
         print(f"\nNext steps:")
