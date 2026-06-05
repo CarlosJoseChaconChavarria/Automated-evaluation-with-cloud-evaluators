@@ -3,7 +3,7 @@
 ## Evaluation Summary
 
 Evaluated: 89 test cases  
-Time: ~10 minutes  
+Time: ~50 minutes (3000s for 89 items)  
 Scoring: GPT-4.1 as LLM judge (1-5 scale)
 
 | Evaluator | Average Score | Pass Rate | Assessment |
@@ -40,7 +40,7 @@ Review the 5-10% of responses that scored below threshold:
 
 - **Scales** to hundreds/thousands of items efficiently
 - **Consistent** scoring criteria across all evaluations
-- **Fast** turnaround (10 minutes for 89 items)
+- **Async cloud processing** (~50 minutes for 89 items)
 - **Repeatable** and trackable over time
 - **CI/CD ready** for integration into deployment pipelines
 - **Detailed reasoning** provided for each score
