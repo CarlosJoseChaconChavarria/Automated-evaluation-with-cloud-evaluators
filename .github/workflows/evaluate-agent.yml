@@ -5,6 +5,8 @@ on:
      branches: [main]
      paths:
        - 'src/agents/trail_guide_agent/**'
+       - 'src/evaluators/**'
+       - 'experiments/**'
   workflow_dispatch:
 
 permissions:
