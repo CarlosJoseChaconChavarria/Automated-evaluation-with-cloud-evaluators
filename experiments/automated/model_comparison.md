@@ -2,7 +2,7 @@
 
 ## Overview
 
-This branch runs the same 89-item evaluation dataset using **GPT-4.1-mini** as the judge model
+This PR runs the same 89-item evaluation dataset using **GPT-4.1-mini** as the judge model
 instead of **GPT-4.1**, to quantify the quality-cost tradeoff.
 
 The model is controlled by a single line in `src/evaluators/evaluate_agent.py`:
